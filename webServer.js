@@ -1,6 +1,5 @@
 const http = require("http");
 const fs = require("fs");
-const path = require("path");
 
 const server = http.createServer(function (request, response) {
   let filePath = request.url;
@@ -22,18 +21,26 @@ const server = http.createServer(function (request, response) {
     ".mp4": "video/mp4",
   };
 
-  fs.readFile(filePath, function (err, data) {
-    if (err) {
-      response.writeHead(404, { "Content-Type": "text/html" });
-      return response.end("404 Not Found");
-    } else {
-      response.writeHead(200, {
-        "Content-Type": `${fileTypes[fileExtension]}`,
-      });
+  if (request.url === "/") {
+    fs.readFile("index.html", function (err, data) {
+      response.writeHead(200, { "Content-Type": "text/html" });
       response.write(data);
       return response.end();
-    }
-  });
+    });
+  } else {
+    fs.readFile(filePath, function (err, data) {
+      if (err) {
+        response.writeHead(404, { "Content-Type": "text/html" });
+        return response.end("404 Not Found");
+      } else {
+        response.writeHead(200, {
+          "Content-Type": `${fileTypes[fileExtension]}`,
+        });
+        response.write(data);
+        return response.end();
+      }
+    });
+  }
 });
 
 server.listen(8080);
