@@ -23,16 +23,23 @@ const server = http.createServer(function (request, response) {
 
   if (request.url === "/") {
     fs.readFile("index.html", function (err, data) {
+      if (err) {
+        response.writeHead(404, { "Content-Type": "text/html" });
+        return response.end("404 error: Page Not Found");
+      }
       response.writeHead(200, { "Content-Type": "text/html" });
       response.write(data);
       return response.end();
     });
-  } else {
+  } 
+
+  else {
     fs.readFile(filePath, function (err, data) {
       if (err) {
         response.writeHead(404, { "Content-Type": "text/html" });
-        return response.end("404 Not Found");
-      } else {
+        return response.end("404 error: Page Not Found");
+      }
+      else {
         response.writeHead(200, {
           "Content-Type": `${fileTypes[fileExtension]}`,
         });
@@ -41,8 +48,10 @@ const server = http.createServer(function (request, response) {
       }
     });
   }
+
+
 });
 
 server.listen(8080);
 
-console.log("server running on 8080");
+console.log("server is running goood on 8080");
