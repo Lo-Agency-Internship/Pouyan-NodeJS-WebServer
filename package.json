@@ -1,0 +1,19 @@
+{
+  "name": "web-server",
+  "version": "1.0.0",
+  "description": "NodeJS-webServer",
+  "main": "webServer.js",
+  "scripts": {
+    "start": "node webServer.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lo-Agency-Internship/Pouyan-NodeJS-WebServer.git"
+  },
+  "author": "Pouyan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Lo-Agency-Internship/Pouyan-NodeJS-WebServer/issues"
+  },
+  "homepage": "https://github.com/Lo-Agency-Internship/Pouyan-NodeJS-WebServer#readme"
+}
